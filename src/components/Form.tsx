@@ -18,6 +18,11 @@ function Form({ onCancel }: FormProps) {
     || !/[a-zA-Z]/.test(senha)
     || !/[!@#$%^&*]/.test(senha);
 
+  const isMinLengthValid = senha.length >= 8;
+  const isMaxLengthValid = senha.length <= 16;
+  const isAlphaNumericValid = /[0-9]/.test(senha) && /[a-zA-Z]/.test(senha);
+  const isSpecialCharValid = /[!@#$%^&*]/.test(senha);
+
   return (
     <div>
       <label htmlFor="nomeServico">Nome do serviço:</label>
@@ -43,6 +48,30 @@ function Form({ onCancel }: FormProps) {
         value={ senha }
         onChange={ (e) => setSenha(e.target.value) }
       />
+
+      {isMinLengthValid ? (
+        <p className="valid-password-check">Possuir 8 ou mais caracteres</p>
+      ) : (
+        <p className="invalid-password-check">Possuir 8 ou mais caracteres</p>
+      )}
+
+      {isMaxLengthValid ? (
+        <p className="valid-password-check">Possuir até 16 caracteres</p>
+      ) : (
+        <p className="invalid-password-check">Possuir até 16 caracteres</p>
+      )}
+
+      {isAlphaNumericValid ? (
+        <p className="valid-password-check">Possuir letras e números</p>
+      ) : (
+        <p className="invalid-password-check">Possuir letras e números</p>
+      )}
+
+      {isSpecialCharValid ? (
+        <p className="valid-password-check">Possuir algum caractere especial</p>
+      ) : (
+        <p className="invalid-password-check">Possuir algum caractere especial</p>
+      )}
 
       <label htmlFor="url">URL:</label>
       <input
