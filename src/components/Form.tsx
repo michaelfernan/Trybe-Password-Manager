@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 
 interface FormProps {
+  onAddService: (service: Service) => void;
   onCancel: () => void;
 }
 
-function Form({ onCancel }: FormProps) {
+interface Service {
+  nomeServico: string;
+  login: string;
+  senha: string;
+  url: string;
+}
+
+function Form({ onAddService, onCancel }: FormProps) {
   const [nomeServico, setNomeServico] = useState('');
   const [login, setLogin] = useState('');
   const [senha, setSenha] = useState('');
@@ -22,6 +30,27 @@ function Form({ onCancel }: FormProps) {
   const isMaxLengthValid = senha.length <= 16;
   const isAlphaNumericValid = /[0-9]/.test(senha) && /[a-zA-Z]/.test(senha);
   const isSpecialCharValid = /[!@#$%^&*]/.test(senha);
+
+  const getPasswordValidationClass = (isValid: boolean) => {
+    return isValid ? 'valid-password-check' : 'invalid-password-check';
+  };
+
+  const handleFormSubmit = () => {
+    const newService: Service = {
+      nomeServico,
+      login,
+      senha,
+      url,
+    };
+
+    onAddService(newService);
+
+    // Reset form fields
+    setNomeServico('');
+    setLogin('');
+    setSenha('');
+    setUrl('');
+  };
 
   return (
     <div>
@@ -50,27 +79,27 @@ function Form({ onCancel }: FormProps) {
       />
 
       {isMinLengthValid ? (
-        <p className="valid-password-check">Possuir 8 ou mais caracteres</p>
+        <p className={ getPasswordValidationClass(true) }>Possuir 8 ou mais caracteres</p>
       ) : (
-        <p className="invalid-password-check">Possuir 8 ou mais caracteres</p>
+        <p className={ getPasswordValidationClass(false) }>Possuir 8 ou mais caracteres</p>
       )}
 
       {isMaxLengthValid ? (
-        <p className="valid-password-check">Possuir até 16 caracteres</p>
+        <p className={ getPasswordValidationClass(true) }>Possuir até 16 caracteres</p>
       ) : (
-        <p className="invalid-password-check">Possuir até 16 caracteres</p>
+        <p className={ getPasswordValidationClass(false) }>Possuir até 16 caracteres</p>
       )}
 
       {isAlphaNumericValid ? (
-        <p className="valid-password-check">Possuir letras e números</p>
+        <p className={ getPasswordValidationClass(true) }>Possuir letras e números</p>
       ) : (
-        <p className="invalid-password-check">Possuir letras e números</p>
+        <p className={ getPasswordValidationClass(false) }>Possuir letras e números</p>
       )}
 
       {isSpecialCharValid ? (
-        <p className="valid-password-check">Possuir algum caractere especial</p>
+        <p className={ getPasswordValidationClass(true) }>Possuir algum caractere especial</p>
       ) : (
-        <p className="invalid-password-check">Possuir algum caractere especial</p>
+        <p className={ getPasswordValidationClass(false) }>Possuir algum caractere especial</p>
       )}
 
       <label htmlFor="url">URL:</label>
@@ -81,7 +110,9 @@ function Form({ onCancel }: FormProps) {
         onChange={ (e) => setUrl(e.target.value) }
       />
 
-      <button disabled={ isButtonDisabled }>Cadastrar</button>
+      <button disabled={ isButtonDisabled } onClick={ handleFormSubmit }>
+        Cadastrar
+      </button>
       <button onClick={ onCancel }>Cancelar</button>
     </div>
   );
