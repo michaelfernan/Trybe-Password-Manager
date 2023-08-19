@@ -101,9 +101,17 @@ function Form({ onAddService, onCancel }: FormProps) {
       )}
 
       {isSpecialCharValid ? (
-        <p className={ getPasswordValidationClass(true) }>Possuir algum caractere especial</p>
+        <p className={ getPasswordValidationClass(true) }>
+          Possuir
+          algum caractere especial
+
+        </p>
       ) : (
-        <p className={ getPasswordValidationClass(false) }>Possuir algum caractere especial</p>
+        <p className={ getPasswordValidationClass(false) }>
+          Possuir
+          algum caractere especial
+
+        </p>
       )}
 
       <label htmlFor="url">URL:</label>
