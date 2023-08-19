@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-function Form({ onCancel }) {
+interface FormProps {
+  onCancel: () => void;
+}
+
+function Form({ onCancel }: FormProps) {
   const [nomeServico, setNomeServico] = useState('');
   const [login, setLogin] = useState('');
   const [senha, setSenha] = useState('');
