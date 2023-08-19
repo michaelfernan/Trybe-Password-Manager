@@ -11,6 +11,7 @@ interface Service {
 function App() {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [services, setServices] = useState<Service[]>([]);
+  const [hidePasswords, setHidePasswords] = useState(false);
 
   const handleToggleForm = () => {
     setIsFormVisible(!isFormVisible);
@@ -25,9 +26,28 @@ function App() {
     setIsFormVisible(false);
   };
 
+  const handleRemoveService = (index: number) => {
+    const updatedServices = [...services];
+    updatedServices.splice(index, 1);
+    setServices(updatedServices);
+  };
+
+  const handleHidePasswords = () => {
+    setHidePasswords(!hidePasswords);
+  };
+
   return (
     <div>
       <h1>Gerenciador de senhas</h1>
+      <label>
+        <input
+          type="checkbox"
+          checked={ hidePasswords }
+          onChange={ handleHidePasswords }
+        />
+        Esconder senhas
+      </label>
+
       {isFormVisible ? (
         <Form onAddService={ handleAddService } onCancel={ handleFormCancel } />
       ) : (
@@ -51,8 +71,14 @@ function App() {
               <p>
                 Senha:
                 {' '}
-                {service.senha}
+                {hidePasswords ? '******' : service.senha}
               </p>
+              <button
+                data-testid={ `remove-btn-${index}` }
+                onClick={ () => handleRemoveService(index) }
+              >
+                Remover
+              </button>
             </li>
           ))}
         </ul>

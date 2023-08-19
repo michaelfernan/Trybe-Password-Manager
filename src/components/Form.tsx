@@ -79,38 +79,42 @@ function Form({ onAddService, onCancel }: FormProps) {
       />
 
       {isMinLengthValid ? (
-        <p className={ getPasswordValidationClass(true) }>Possuir 8 ou mais caracteres</p>
+        <p className={ getPasswordValidationClass(true) }>
+          Possuir 8 ou mais caracteres
+        </p>
       ) : (
         <p className={ getPasswordValidationClass(false) }>
-          Possuir 8
-          ou mais caracteres
-
+          Possuir 8 ou mais caracteres
         </p>
       )}
 
       {isMaxLengthValid ? (
-        <p className={ getPasswordValidationClass(true) }>Possuir até 16 caracteres</p>
+        <p className={ getPasswordValidationClass(true) }>
+          Possuir até 16 caracteres
+        </p>
       ) : (
-        <p className={ getPasswordValidationClass(false) }>Possuir até 16 caracteres</p>
+        <p className={ getPasswordValidationClass(false) }>
+          Possuir até 16 caracteres
+        </p>
       )}
 
       {isAlphaNumericValid ? (
-        <p className={ getPasswordValidationClass(true) }>Possuir letras e números</p>
+        <p className={ getPasswordValidationClass(true) }>
+          Possuir letras e números
+        </p>
       ) : (
-        <p className={ getPasswordValidationClass(false) }>Possuir letras e números</p>
+        <p className={ getPasswordValidationClass(false) }>
+          Possuir letras e números
+        </p>
       )}
 
       {isSpecialCharValid ? (
         <p className={ getPasswordValidationClass(true) }>
-          Possuir
-          algum caractere especial
-
+          Possuir algum caractere especial
         </p>
       ) : (
         <p className={ getPasswordValidationClass(false) }>
-          Possuir
-          algum caractere especial
-
+          Possuir algum caractere especial
         </p>
       )}
 
