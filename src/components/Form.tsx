@@ -81,7 +81,11 @@ function Form({ onAddService, onCancel }: FormProps) {
       {isMinLengthValid ? (
         <p className={ getPasswordValidationClass(true) }>Possuir 8 ou mais caracteres</p>
       ) : (
-        <p className={ getPasswordValidationClass(false) }>Possuir 8 ou mais caracteres</p>
+        <p className={ getPasswordValidationClass(false) }>
+          Possuir 8
+          ou mais caracteres
+
+        </p>
       )}
 
       {isMaxLengthValid ? (
