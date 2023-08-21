@@ -1,3 +1,5 @@
+// ServiceList.tsx
+
 import React from 'react';
 import ServiceItem from './ServiceItem';
 
@@ -16,16 +18,22 @@ interface ServiceListProps {
 
 function ServiceList({ services, hidePasswords, onRemoveService }: ServiceListProps) {
   return (
-    <ul>
-      {services.map((service, index) => (
-        <ServiceItem
-          key={ index }
-          service={ service }
-          hidePasswords={ hidePasswords }
-          onRemove={ () => onRemoveService(index) }
-        />
-      ))}
-    </ul>
+    <div>
+      {services.length === 0 ? (
+        <p>Nenhuma senha cadastrada</p>
+      ) : (
+        <ul>
+          {services.map((service, index) => (
+            <ServiceItem
+              key={ index }
+              service={ service }
+              hidePasswords={ hidePasswords }
+              onRemove={ () => onRemoveService(index) }
+            />
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 

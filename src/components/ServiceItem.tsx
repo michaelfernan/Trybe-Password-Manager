@@ -1,3 +1,5 @@
+// ServiceItem.tsx
+
 import React from 'react';
 
 interface Service {
@@ -29,7 +31,7 @@ function ServiceItem({ service, hidePasswords, onRemove }: ServiceItemProps) {
         {' '}
         {hidePasswords ? '******' : service.senha}
       </p>
-      <button onClick={ onRemove }>Remover</button>
+      <button data-testid="remove-btn" onClick={ onRemove }>Remover</button>
     </li>
   );
 }
