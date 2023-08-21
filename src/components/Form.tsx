@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 interface FormProps {
   onAddService: (service: Service) => void;
@@ -17,6 +18,7 @@ function Form({ onAddService, onCancel }: FormProps) {
   const [login, setLogin] = useState('');
   const [senha, setSenha] = useState('');
   const [url, setUrl] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const isButtonDisabled = nomeServico === ''
     || login === ''
@@ -45,11 +47,23 @@ function Form({ onAddService, onCancel }: FormProps) {
 
     onAddService(newService);
 
+    // Show success alert using SweetAlert2
+    Swal.fire({
+      icon: 'success',
+      title: 'Serviço cadastrado com sucesso',
+      showConfirmButton: false,
+      timer: 1500, // 1.5 seconds
+    });
+
     // Reset form fields
     setNomeServico('');
     setLogin('');
     setSenha('');
     setUrl('');
+  };
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
   };
 
   return (
@@ -72,7 +86,7 @@ function Form({ onAddService, onCancel }: FormProps) {
 
       <label htmlFor="senha">Senha:</label>
       <input
-        type="password"
+        type={ isPasswordVisible ? 'text' : 'password' }
         id="senha"
         value={ senha }
         onChange={ (e) => setSenha(e.target.value) }
@@ -130,6 +144,13 @@ function Form({ onAddService, onCancel }: FormProps) {
         Cadastrar
       </button>
       <button onClick={ onCancel }>Cancelar</button>
+
+      <button
+        data-testid="show-hide-form-password"
+        onClick={ togglePasswordVisibility }
+      >
+        Mostrar/Esconder Senha
+      </button>
     </div>
   );
 }

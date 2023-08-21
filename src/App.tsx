@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import Header from './components/Header';
 import Form from './components/Form';
+import ServiceList from './components/ServiceList';
 
 interface Service {
   nomeServico: string;
@@ -32,21 +34,16 @@ function App() {
     setServices(updatedServices);
   };
 
-  const handleHidePasswords = () => {
+  const handleToggleHidePasswords = () => {
     setHidePasswords(!hidePasswords);
   };
 
   return (
     <div>
-      <h1>Gerenciador de senhas</h1>
-      <label>
-        <input
-          type="checkbox"
-          checked={ hidePasswords }
-          onChange={ handleHidePasswords }
-        />
-        Esconder senhas
-      </label>
+      <Header
+        hidePasswords={ hidePasswords }
+        onToggleHidePasswords={ handleToggleHidePasswords }
+      />
 
       {isFormVisible ? (
         <Form onAddService={ handleAddService } onCancel={ handleFormCancel } />
@@ -57,31 +54,11 @@ function App() {
       {services.length === 0 ? (
         <p>Nenhuma senha cadastrada</p>
       ) : (
-        <ul>
-          {services.map((service, index) => (
-            <li key={ index }>
-              <a href={ service.url } target="_blank" rel="noopener noreferrer">
-                {service.nomeServico}
-              </a>
-              <p>
-                Login:
-                {' '}
-                {service.login}
-              </p>
-              <p>
-                Senha:
-                {' '}
-                {hidePasswords ? '******' : service.senha}
-              </p>
-              <button
-                data-testid={ `remove-btn-${index}` }
-                onClick={ () => handleRemoveService(index) }
-              >
-                Remover
-              </button>
-            </li>
-          ))}
-        </ul>
+        <ServiceList
+          services={ services }
+          hidePasswords={ hidePasswords }
+          onRemoveService={ handleRemoveService }
+        />
       )}
     </div>
   );
