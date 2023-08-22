@@ -1,7 +1,5 @@
-// ServiceItem.tsx
-
 import React from 'react';
-
+// codigo realizado com auxilio de Michelle Fernandes
 interface Service {
   nomeServico: string;
   login: string;

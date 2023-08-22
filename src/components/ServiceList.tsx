@@ -1,5 +1,3 @@
-// ServiceList.tsx
-
 import React from 'react';
 import ServiceItem from './ServiceItem';
 

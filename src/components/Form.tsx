@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Swal from 'sweetalert2'; // Import SweetAlert2
-
+import Swal from 'sweetalert2';
+// codigo realizado com auxilio de Michelle Fernandes
 interface FormProps {
   onAddService: (service: Service) => void;
   onCancel: () => void;
@@ -46,16 +46,13 @@ function Form({ onAddService, onCancel }: FormProps) {
     };
 
     onAddService(newService);
-
-    // Show success alert using SweetAlert2
     Swal.fire({
       icon: 'success',
       title: 'Serviço cadastrado com sucesso',
       showConfirmButton: false,
-      timer: 1500, // 1.5 seconds
+      timer: 1500,
     });
 
-    // Reset form fields
     setNomeServico('');
     setLogin('');
     setSenha('');
