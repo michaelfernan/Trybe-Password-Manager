@@ -29,7 +29,11 @@ function ServiceItem({ service, hidePasswords, onRemove }: ServiceItemProps) {
       <p>
         Senha:
         {' '}
-        {hidePasswords ? '******' : service.senha}
+        <span>
+          {' '}
+          {hidePasswords ? '******' : service.senha}
+          {' '}
+        </span>
       </p>
       <button data-testid="remove-btn" onClick={ onRemove }>Remover</button>
     </li>
