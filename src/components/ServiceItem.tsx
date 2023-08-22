@@ -24,7 +24,9 @@ function ServiceItem({ service, hidePasswords, onRemove }: ServiceItemProps) {
       <p>
         Login:
         {' '}
-        {service.login}
+        <span>
+          {service.login}
+        </span>
       </p>
       <p>
         Senha:
